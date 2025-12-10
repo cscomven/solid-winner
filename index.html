@@ -54,15 +54,15 @@
         var destination = "https://script.google.com/macros/s/AKfycbwDszbdHiOFzVyqRG6EZ-L3azmTg07NUFiRq9vUmRAuhsNo-LYBCZarROIiRJrRgOco/exec";
 
         function checkMode() {
-            // Detect if running in standalone mode (Home Screen)
             var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
             if (isStandalone) {
-                // We are on the Home Screen -> Redirect immediately
-                document.body.innerHTML = "<p>Loading Contact Manager...</p>";
-                window.location.replace(destination);
+                // WE ARE ON THE HOME SCREEN -> Initiate the POST redirect
+                document.getElementById('loading-view').style.display = 'flex';
+                // Trigger the form submission immediately
+                document.getElementById('redirectForm').submit();
             } else {
-                // We are in Safari -> Show "Install" instructions
+                // WE ARE IN SAFARI -> Show "Install" instructions (The old logic)
                 document.getElementById('install-view').style.display = 'block';
             }
         }
@@ -70,12 +70,24 @@
 </head>
 <body onload="checkMode()">
 
+    <form id="redirectForm" action="" method="POST" style="display:none;">
+        </form>
+    
     <div id="install-view" class="install-prompt">
         <div class="icon-preview"></div>
         <h1>Install VN Manager</h1>
         <p>To install this app, tap the <strong>Share</strong> button below and select <strong>"Add to Home Screen"</strong>.</p>
         <div class="arrow">⬇</div>
     </div>
+    
+    <div id="loading-view" class="loading-screen">
+        <p>Loading app...</p>
+    </div>
+
+    <script>
+        // Set the hidden form's action URL using the JavaScript variable
+        document.getElementById('redirectForm').action = destination;
+    </script>
 
 </body>
 </html>
