@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>VN Contact Manager</title>
-    
+
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cscomven/solid-winner/refs/heads/main/180x180.png">
-    
+    <meta name="apple-mobile-web-app-title" content="VN Contact Manager">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <style>
+        /* This page is now a permanent landing page for the icon */
         body {
             background-color: #f5f5f5;
             font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -18,76 +19,31 @@
             padding: 40px 20px;
             margin: 0;
             height: 100vh;
-            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        
-        /* Styles for the "Install" screen */
-        .install-prompt { display: none; }
         .icon-preview {
             width: 120px;
             height: 120px;
             background-color: #ddd;
             border-radius: 22px;
             margin-bottom: 20px;
-            background-image: url('https://raw.githubusercontent.com/cscomven/solid-winner/refs/heads/main/180x180.png');
+            background-image: url('https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/icon.png');
             background-size: cover;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        h1 { font-size: 24px; margin-bottom: 10px; color: #333; }
-        p { color: #666; font-size: 16px; line-height: 1.5; max-width: 300px; margin: 0 auto; }
-        .arrow { font-size: 30px; margin-top: 20px; animation: bounce 2s infinite; }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(10px);}
-            60% {transform: translateY(5px);}
-        }
+        /* ... rest of your styling ... */
     </style>
-
-    <script>
-        // === CONFIGURATION ===
-        // Paste your Google Script Web App URL here
-        var destination = "https://script.google.com/macros/s/AKfycbwDszbdHiOFzVyqRG6EZ-L3azmTg07NUFiRq9vUmRAuhsNo-LYBCZarROIiRJrRgOco/exec";
-
-        function checkMode() {
-            var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-
-            if (isStandalone) {
-                // WE ARE ON THE HOME SCREEN -> Initiate the POST redirect
-                document.getElementById('loading-view').style.display = 'flex';
-                // Trigger the form submission immediately
-                document.getElementById('redirectForm').submit();
-            } else {
-                // WE ARE IN SAFARI -> Show "Install" instructions (The old logic)
-                document.getElementById('install-view').style.display = 'block';
-            }
-        }
-    </script>
 </head>
-<body onload="checkMode()">
+<body>
+    <div class="icon-preview"></div>
+    <h1>Install VN Manager</h1>
+    <p>To use the full-screen app, please visit your actual Web App URL and use the **Share** menu to **Add to Home Screen**.</p>
+    <p>Your app is located here: [PASTE YOUR GOOGLE SCRIPT URL HERE]</p>
+    <div class="arrow">⬇</div>
 
-    <form id="redirectForm" action="" method="POST" style="display:none;">
-        </form>
-    
-    <div id="install-view" class="install-prompt">
-        <div class="icon-preview"></div>
-        <h1>Install VN Manager</h1>
-        <p>To install this app, tap the <strong>Share</strong> button below and select <strong>"Add to Home Screen"</strong>.</p>
-        <div class="arrow">⬇</div>
-    </div>
-    
-    <div id="loading-view" class="loading-screen">
-        <p>Loading app...</p>
-    </div>
-
-    <script>
-        // Set the hidden form's action URL using the JavaScript variable
-        document.getElementById('redirectForm').action = destination;
-    </script>
 
 </body>
 </html>
