@@ -8,30 +8,74 @@
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-    <script>
-        // Replace this URL with your actual Google Script Web App URL
-        // Make sure it ends with /exec
-        var destination = "https://script.google.com/macros/s/AKfycbwDszbdHiOFzVyqRG6EZ-L3azmTg07NUFiRq9vUmRAuhsNo-LYBCZarROIiRJrRgOco/exec";
-        
-        // This performs the redirect immediately
-        window.location.replace(destination);
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <style>
-        /* Optional: Makes the brief flash of this page look nice */
         body {
-            background-color: #000000; /* Match your app theme */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: center;
+            padding: 40px 20px;
             margin: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Styles for the "Install" screen */
+        .install-prompt { display: none; }
+        .icon-preview {
+            width: 120px;
+            height: 120px;
+            background-color: #ddd;
+            border-radius: 22px;
+            margin-bottom: 20px;
+            background-image: url('https://raw.githubusercontent.com/cscomven/solid-winner/refs/heads/main/180x180.png');
+            background-size: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        h1 { font-size: 24px; margin-bottom: 10px; color: #333; }
+        p { color: #666; font-size: 16px; line-height: 1.5; max-width: 300px; margin: 0 auto; }
+        .arrow { font-size: 30px; margin-top: 20px; animation: bounce 2s infinite; }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(10px);}
+            60% {transform: translateY(5px);}
         }
     </style>
+
+    <script>
+        // === CONFIGURATION ===
+        // Paste your Google Script Web App URL here
+        var destination = "https://script.google.com/macros/s/AKfycbwDszbdHiOFzVyqRG6EZ-L3azmTg07NUFiRq9vUmRAuhsNo-LYBCZarROIiRJrRgOco/exec";
+
+        function checkMode() {
+            // Detect if running in standalone mode (Home Screen)
+            var isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+            if (isStandalone) {
+                // We are on the Home Screen -> Redirect immediately
+                document.body.innerHTML = "<p>Loading Contact Manager...</p>";
+                window.location.replace(destination);
+            } else {
+                // We are in Safari -> Show "Install" instructions
+                document.getElementById('install-view').style.display = 'block';
+            }
+        }
+    </script>
 </head>
-<body>
-    <p style="color: white; font-family: sans-serif;">Loading VN Contact Manager...</p>
+<body onload="checkMode()">
+
+    <div id="install-view" class="install-prompt">
+        <div class="icon-preview"></div>
+        <h1>Install VN Manager</h1>
+        <p>To install this app, tap the <strong>Share</strong> button below and select <strong>"Add to Home Screen"</strong>.</p>
+        <div class="arrow">⬇</div>
+    </div>
+
 </body>
 </html>
