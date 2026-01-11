@@ -1,0 +1,25 @@
+{
+  "name": "VN Contact Manager",
+  "short_name": "Contacts",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#8baac8",
+  "theme_color": "#8baac8",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/cscomven/solid-winner/main/180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/cscomven/solid-winner/main/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/cscomven/solid-winner/main/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
